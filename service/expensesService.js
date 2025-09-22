@@ -40,6 +40,17 @@ const addExpensesService = (description, amount) => {
     }
 };
 
+const listExpensesService = () => {
+    const expenses = loadExpenses();
+
+    if(expenses === '') {
+        return `There's no expenses`
+    };
+
+    return expenses;
+};
+
 module.exports = {
-    addExpensesService
+    addExpensesService,
+    listExpensesService
 };
