@@ -1,6 +1,8 @@
 const { 
     addExpensesService,
-    listExpensesService
+    listExpensesService,
+    summaryExpensesService,
+    deleteExpensesService
 } = require('../../service/expensesService');
 
 const addExpensesHandler = (description, amount) => {
@@ -27,7 +29,30 @@ const listExpensesHandler = () => {
     };
 };
 
+const summaryExpensesHandler = () => {
+    try {
+        const totalExpenses = summaryExpensesService();
+
+        console.log(`Total expenses: $${totalExpenses}`);
+    } catch(error) {
+        console.error(error);
+    }
+};
+
+const deleteExpensesHandler = (expenseId) => {
+    try {
+        const numberExpenseId = parseInt(expenseId);
+
+        const result = deleteExpensesService(numberExpenseId);
+        console.log(result);
+    } catch(error) {
+        console.error(error);
+    };
+}
+
 module.exports = {
     addExpensesHandler,
-    listExpensesHandler
+    listExpensesHandler,
+    summaryExpensesHandler,
+    deleteExpensesHandler
 };

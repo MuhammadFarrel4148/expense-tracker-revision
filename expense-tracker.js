@@ -1,6 +1,8 @@
 const {
     addExpensesHandler,
-    listExpensesHandler
+    listExpensesHandler,
+    summaryExpensesHandler,
+    deleteExpensesHandler
 } = require('./api/expenses/expensesHandler');
 
 const [ , , command, ...args ] = process.argv;
@@ -11,6 +13,12 @@ switch(command) {
         break;
     case 'list': 
         listExpensesHandler();
+        break;
+    case 'summary':
+        summaryExpensesHandler();
+        break;
+    case 'delete':
+        deleteExpensesHandler(args[1]);
         break;
     default: 
         console.log(`command ${command} tidak tersedia`);

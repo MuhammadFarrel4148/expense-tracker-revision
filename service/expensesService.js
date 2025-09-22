@@ -50,7 +50,45 @@ const listExpensesService = () => {
     return expenses;
 };
 
+const summaryExpensesService = () => {
+    const expenses = loadExpenses();
+
+    if(expenses === '') {
+        return 0;
+    };
+
+    const totalExpenses = expenses.reduce((acc, currentValue) => {
+        return acc + currentValue.amount;
+    }, 0);
+
+    return totalExpenses;
+};
+
+const deleteExpensesService = (expenseId) => {
+    try {
+        const expenses = loadExpenses();
+
+        const expenseIndex = expenses.findIndex((expense) => expense.id === expenseId);
+
+        if(expenseIndex === -1) {
+            return `Expense tidak ditemukan`;   
+        };
+
+        expenses.splice(expenseIndex, 1);
+
+        if((expenses.findIndex((expense) => expense.id === expenseId)) === -1) {
+            savedExpenses(expenses);
+            return `Expense deleted successfully`;
+        };
+        
+    } catch(error) {
+        console.error(error);
+    };
+};
+
 module.exports = {
     addExpensesService,
-    listExpensesService
+    listExpensesService,
+    summaryExpensesService,
+    deleteExpensesService
 };
