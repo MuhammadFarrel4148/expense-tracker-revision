@@ -29,9 +29,9 @@ const listExpensesHandler = () => {
     };
 };
 
-const summaryExpensesHandler = () => {
+const summaryExpensesHandler = (month) => {
     try {
-        const totalExpenses = summaryExpensesService();
+        const totalExpenses = summaryExpensesService(month);
 
         console.log(`Total expenses: $${totalExpenses}`);
     } catch(error) {

@@ -15,7 +15,7 @@ switch(command) {
         listExpensesHandler();
         break;
     case 'summary':
-        summaryExpensesHandler();
+        summaryExpensesHandler(args[1]);
         break;
     case 'delete':
         deleteExpensesHandler(args[1]);

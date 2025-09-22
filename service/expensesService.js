@@ -50,18 +50,33 @@ const listExpensesService = () => {
     return expenses;
 };
 
-const summaryExpensesService = () => {
+const summaryExpensesService = (month) => {
     const expenses = loadExpenses();
+    let totalExpenses;
 
     if(expenses === '') {
-        return 0;
+            return 0;
     };
 
-    const totalExpenses = expenses.reduce((acc, currentValue) => {
-        return acc + currentValue.amount;
-    }, 0);
+    if(month === undefined) {
+        totalExpenses = expenses.reduce((acc, currentValue) => {
+            return acc + currentValue.amount;
+        }, 0);
 
-    return totalExpenses;
+        return totalExpenses;   
+    } else {
+        const filteredExpenses = expenses.filter((expense) => expense.date.substring(6, 7) === month);
+        
+        if(filteredExpenses.length === 0) {
+            return 0;
+        };
+
+        totalExpenses = filteredExpenses.reduce((acc, currentValue) => {
+            return acc + currentValue.amount;
+        }, 0);
+    };
+
+    return totalExpenses
 };
 
 const deleteExpensesService = (expenseId) => {
